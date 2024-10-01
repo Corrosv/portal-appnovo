@@ -13,6 +13,22 @@ return new class extends Migration
     {
         Schema::create('ponto_turisticos', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->string('contato');
+            $table->string('latitude_longitude');
+            $table->string('descricao');
+            $table->text('como_chegar');
+            $table->text('imagem');
+
+
+            $table->unsignedBigInteger('id_endereco');
+            $table->foreign('id_endereco')->references('id')->on('tipo_enderecos');
+            $table->unsignedBigInteger('id_tipo_ponto_turistico');
+            $table->foreign('id_tipo_ponto_turistico')->references('id')->on('id_tipo_ponto_turisticos');
+
+
+
+
             $table->timestamps();
         });
     }

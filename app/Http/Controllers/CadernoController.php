@@ -13,7 +13,11 @@ class CadernoController extends Controller
      */
     public function index()
     {
-        //
+        //Carregue os dados do banco
+        //select * from cadernos
+        $cadernos = Caderno::all();
+        // fazer o response pro usuario
+        return view('admin.cadernos.index',compact('cadernos'));
     }
 
     /**
@@ -21,7 +25,9 @@ class CadernoController extends Controller
      */
     public function create()
     {
-        //
+        //Retornar a pagina de criação
+        return view('admin.cadernos.create');
+
     }
 
     /**
@@ -29,7 +35,8 @@ class CadernoController extends Controller
      */
     public function store(StoreCadernoRequest $request)
     {
-        //
+        //Debug 
+        dd($request);
     }
 
     /**
