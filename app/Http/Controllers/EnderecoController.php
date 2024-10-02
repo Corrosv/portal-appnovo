@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEnderecoRequest;
 use App\Http\Requests\UpdateEnderecoRequest;
+use App\Models\Cidade;
 use App\Models\Endereco;
 
 class EnderecoController extends Controller
@@ -14,11 +15,8 @@ class EnderecoController extends Controller
     public function index()
     {
         //
-        //Carregue os dados do banco
-        //select * from cadernos
-        $endereco = Endereco::all();
-        // fazer o response pro usuario
-        return view('admin.endereco.index',compact('enderecos'));
+        $enderecos = Endereco::all();
+        return view('admin.enderecos.index', compact('enderecos'));
     }
 
     /**
@@ -27,8 +25,9 @@ class EnderecoController extends Controller
     public function create()
     {
         //
-        $cidade = Cidade::all();
-    return view('site.endereco.create', compact('enderecos','cidades','tipo_ponto_turistico'));
+        $cidades = Cidade::all();
+        
+        return view('admin.enderecos.index', compact('cidades'));
     }
 
     /**
@@ -36,13 +35,10 @@ class EnderecoController extends Controller
      */
     public function store(StoreEnderecoRequest $request)
     {
-        ///Debug 
-        //dd($request);
-        //Aqui vamos tratar as regras de salvamento e  vamos persistir no banco 
+        //
         Endereco::create($request->all());
-        //Redirecionar ou  devolver uma mensagem para o cliente
-        //return redirect()->route('/noticias.index');
-        return redirect()->away('/enderecos')->with('success','Endereco  criado com sucesso!');
+        return redirect()->away('/enderecos')
+        ->with('success', 'Endereços possui dependentes!');
     }
 
     /**
@@ -51,8 +47,7 @@ class EnderecoController extends Controller
     public function show(Endereco $endereco)
     {
         //
-        return view('admin.enderecos.show', compact('endereco'));
-
+        return view('admin.enderecos.index', compact('endereco'));
     }
 
     /**
@@ -60,11 +55,9 @@ class EnderecoController extends Controller
      */
     public function edit(Endereco $endereco)
     {
-        //
-        $enderecos = Endereco::all();
         $cidades = Cidade::all();
-        return view('admin.endereco.edit', compact('cadernos'));
-
+        
+        return view('admin.enderecos.index', compact('cidades','endereco'));
     }
 
     /**
@@ -74,7 +67,9 @@ class EnderecoController extends Controller
     {
         //
         $endereco->update($request->all());
-        return redirect()->away('/enderecos')->with('success', 'Enderecos atualizado com sucesso!');
+
+        return redirect()->away('/enderecos')
+            ->with('success', 'Endereço possui dependentes!');
     }
 
     /**
@@ -83,14 +78,15 @@ class EnderecoController extends Controller
     public function destroy(Endereco $endereco)
     {
         //
-    if($endereco->negocios()->count() > 0 || $endereco->pontoTuristicos()->count() > 0)
-    {
-    }else{
-
-    }
-     
-        return redirect()->away('/enderecos')->with('success', 'Deletado  com sucesso!');
+        if($endereco->negocios()->count > 0 
+       ||  $endereco->pontosTuristicos()->count() > 0)
+        {
+            return redirect()->away('/enderecos')
+            ->with('error', 'Endereços possui dependentes!');
+        }
+        $endereco->delete();
+        
+        return redirect()->away('/enderecos')
+            ->with('success', 'Endereços possui dependentes!');
     }
 }
-
-

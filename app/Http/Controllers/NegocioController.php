@@ -14,6 +14,8 @@ class NegocioController extends Controller
     public function index()
     {
         //
+        $negocios = Negocio::paginate(25);
+        return view('admin.negocios.index', compact('negocios'));
     }
 
     /**
@@ -22,6 +24,10 @@ class NegocioController extends Controller
     public function create()
     {
         //
+        $enderecos = Endereco::all();
+        $tiposNegocios = TipoNegocio::all();
+        return view('admin.negocios.create', 
+        compact('negocios', 'enderecos','tiposNegocios'));
     }
 
     /**
@@ -30,6 +36,9 @@ class NegocioController extends Controller
     public function store(StoreNegocioRequest $request)
     {
         //
+        Negocio::create($request->all());
+        return redirect()->away('/negocios')
+        ->with('success', 'Negocio removido com sucesso!');
     }
 
     /**
@@ -38,6 +47,8 @@ class NegocioController extends Controller
     public function show(Negocio $negocio)
     {
         //
+        return view('admin.negocios.show', compact('negocio'));
+
     }
 
     /**
@@ -46,6 +57,10 @@ class NegocioController extends Controller
     public function edit(Negocio $negocio)
     {
         //
+        $enderecos = Endereco::all();
+        $tiposNegocios = TipoNegocio::all();
+        return view('admin.negocios.edit', 
+        compact('negocio', 'enderecos','tiposNegocios'));
     }
 
     /**
@@ -54,6 +69,9 @@ class NegocioController extends Controller
     public function update(UpdateNegocioRequest $request, Negocio $negocio)
     {
         //
+        $negocio->update($request->all());
+        return redirect()->away('/negocios')
+        ->with('success', 'Negocio removido com sucesso!');
     }
 
     /**
@@ -62,5 +80,8 @@ class NegocioController extends Controller
     public function destroy(Negocio $negocio)
     {
         //
+        $negocio->delete();
+        return redirect()->away('/negocios')
+        ->with('success', 'Negocio removido com sucesso!');
     }
 }

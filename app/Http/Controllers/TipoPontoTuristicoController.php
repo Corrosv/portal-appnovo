@@ -14,6 +14,8 @@ class TipoPontoTuristicoController extends Controller
     public function index()
     {
         //
+        $tipos = TipoPontoTuristico::paginate(25);
+        return view('admin.tipospontoturistico.index', compact('tipos'));
     }
 
     /**
@@ -22,6 +24,7 @@ class TipoPontoTuristicoController extends Controller
     public function create()
     {
         //
+        return view('admin.tipospontoturistico.create');
     }
 
     /**
@@ -30,6 +33,10 @@ class TipoPontoTuristicoController extends Controller
     public function store(StoreTipoPontoTuristicoRequest $request)
     {
         //
+        TipoPontoTuristico::create($request->all());
+
+        return redirect()->away('/tipopontoturisticos')
+                ->with('error', 'Tipo Ponto Turistico possui dependentes!');
     }
 
     /**
@@ -38,6 +45,7 @@ class TipoPontoTuristicoController extends Controller
     public function show(TipoPontoTuristico $tipoPontoTuristico)
     {
         //
+        return view('admin.tipospontoturistico.show', compact('tipoPontoTuristico'));
     }
 
     /**
@@ -46,6 +54,7 @@ class TipoPontoTuristicoController extends Controller
     public function edit(TipoPontoTuristico $tipoPontoTuristico)
     {
         //
+        return view('admin.tipospontoturistico.edit', compact('tipoPontoTuristico'));
     }
 
     /**
@@ -54,6 +63,10 @@ class TipoPontoTuristicoController extends Controller
     public function update(UpdateTipoPontoTuristicoRequest $request, TipoPontoTuristico $tipoPontoTuristico)
     {
         //
+        $tipoPontoTuristico->update($request->all());
+
+        return redirect()->away('/tipopontoturisticos')
+        ->with('error', 'Tipo Ponto Turistico possui dependentes!');
     }
 
     /**
@@ -62,5 +75,13 @@ class TipoPontoTuristicoController extends Controller
     public function destroy(TipoPontoTuristico $tipoPontoTuristico)
     {
         //
+        if ($tipoNegocio->pontosturisticos()->count() > 0) {
+            return redirect()->away('/tipopontoturisticos')
+                ->with('error', 'Tipo Ponto Turistico possui dependentes!');
+        }
+
+        $tipoNegocio->delete();
+        return redirect()->away('/tipopontoturisticos')
+            ->with('success', 'Tipo Ponto Turistico removido com sucesso!');
     }
-}
+    }

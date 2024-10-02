@@ -14,9 +14,9 @@ class EstadoController extends Controller
     public function index()
     {
         //
-        $estado = Caderno::all();
-        // fazer o response pro usuario
-        return view('admin.estado.index',compact('estados'));
+        $estados = Estado::paginate(25);
+
+        return view('admin.estados.index', compact('estados'));
     }
 
     /**
@@ -25,8 +25,7 @@ class EstadoController extends Controller
     public function create()
     {
         //
-        $estado = Estado::all();
-        return view('site.estados.create',compact('estados'));
+        return view('admin.estados.create');
     }
 
     /**
@@ -36,9 +35,7 @@ class EstadoController extends Controller
     {
         //
         Estado::create($request->all());
-       //Redirecionar ou  devolver uma mensagem para o cliente
-       //return redirect()->route('/noticias.index');
-       return redirect()->away('/estados')->with('success','Estados criado com sucesso!');
+        return redirect()->away('/estados')->with('success','Estado criado com sucesso!');
     }
 
     /**
@@ -48,7 +45,6 @@ class EstadoController extends Controller
     {
         //
         return view('admin.estados.show', compact('estado'));
-
     }
 
     /**
@@ -57,8 +53,7 @@ class EstadoController extends Controller
     public function edit(Estado $estado)
     {
         //
-        $estados = Autor::all();
-        return view('admin.estado.edit', compact('cidade'));
+        return view('admin.estados.edit', compact('estado'));
     }
 
     /**
@@ -68,8 +63,7 @@ class EstadoController extends Controller
     {
         //
         $estado->update($request->all());
-        return redirect()->away('/estados')->with('success', 'Estados  atualizados com sucesso!');
-
+        return redirect()->away('/estados')->with('success','Estado atualizado com sucesso!');
     }
 
     /**
@@ -78,10 +72,12 @@ class EstadoController extends Controller
     public function destroy(Estado $estado)
     {
         //
-        $estado->delete();
+        if ($estado->cidades()->count() > 0) {
 
-        
-        return redirect()->away('/estados')->with('success', 'Deletado  com sucesso!');
-
+            return redirect()->away('/estados')->with('error','Estado possui dependentes!');
+        } else {
+            $estado->delete();
+        }
+        return redirect()->away('/estados')->with('success','Estado removido com sucesso!');
     }
 }

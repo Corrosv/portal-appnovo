@@ -13,11 +13,11 @@ class CadernoController extends Controller
      */
     public function index()
     {
-        //Carregue os dados do banco
+        //Carregue os dados dos banco
         //select * from cadernos
         $cadernos = Caderno::paginate(25);
-        // fazer o response pro usuario
-        return view('admin.cadernos.index',compact('cadernos'));
+        // Fazer o response pro usuario
+        return view('admin.cadernos.index', compact('cadernos'));
     }
 
     /**
@@ -25,9 +25,8 @@ class CadernoController extends Controller
      */
     public function create()
     {
-        $caderno = Caderno::all();
-
-        return view('site.caderno.create', compact('cadernos'));
+        //Retornar a pagina de criação
+        return view('admin.cadernos.create');
     }
 
     /**
@@ -35,13 +34,10 @@ class CadernoController extends Controller
      */
     public function store(StoreCadernoRequest $request)
     {
-        //Debug 
-        //dd($request);
-        //Aqui vamos tratar as regras de salvamento e  vamos persistir no banco 
         Caderno::create($request->all());
-       //Redirecionar ou  devolver uma mensagem para o cliente
-       //return redirect()->route('/noticias.index');
-       return redirect()->away('/cadernos')->with('success','Caderno  criado com sucesso!');
+
+        return redirect()->away('/cadernos')
+            ->with('success', 'Caderno criado com sucesso!');
     }
 
     /**
@@ -51,8 +47,6 @@ class CadernoController extends Controller
     {
         //
         return view('admin.cadernos.show', compact('caderno'));
-
-
     }
 
     /**
@@ -61,7 +55,7 @@ class CadernoController extends Controller
     public function edit(Caderno $caderno)
     {
         //
-        return view('admin.caderno.edit', compact('cadernos'));
+        return view('admin.cadernos.edit', compact('caderno'));
     }
 
     /**
@@ -71,22 +65,23 @@ class CadernoController extends Controller
     {
         //
         $caderno->update($request->all());
-        return redirect()->away('/cadernos')->with('success', 'Cadernos atualizado com sucesso!');
+        return redirect()->away('/cadernos')
+            ->with('success', 'Caderno atualizado com sucesso!');
     }
-    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Caderno $caderno)
-    
     {
         //
-        if($caderno->noticias()->count() > 0){
-            return redirect()->away('/cadernos')->with('error', 'Caderno possui dependentes!');
+        if ($caderno->noticias()->count() > 0) {
+            return redirect()->away('/cadernos')
+                ->with('error', 'Caderno possui dependentes!');
         } else {
-        $caderno->delete();
-         return redirect()->away('/cadernos')->with('success', 'Deletado  com sucesso!');
+            $caderno->delete();
+            return redirect()->away('/cadernos')
+                ->with('success', 'Caderno removido com sucesso!');
         }
     }
 }

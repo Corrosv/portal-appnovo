@@ -14,6 +14,8 @@ class TipoNegocioController extends Controller
     public function index()
     {
         //
+        $tipoNegocios = TipoNegocio::paginate(25);
+        return view('admin.tiponegocios.index', compact('tipoNegocios'));
     }
 
     /**
@@ -22,6 +24,7 @@ class TipoNegocioController extends Controller
     public function create()
     {
         //
+        return view('admin.tiponegocios.create');
     }
 
     /**
@@ -30,6 +33,9 @@ class TipoNegocioController extends Controller
     public function store(StoreTipoNegocioRequest $request)
     {
         //
+        TipoNegocio::create($request);
+        return redirect()->away('/tiponegocios')
+            ->with('success', 'Tipo Negocio criado com sucesso!');
     }
 
     /**
@@ -38,6 +44,7 @@ class TipoNegocioController extends Controller
     public function show(TipoNegocio $tipoNegocio)
     {
         //
+        return view('admin.tiponegocios.index', compact('tipoNegocio'));
     }
 
     /**
@@ -46,6 +53,7 @@ class TipoNegocioController extends Controller
     public function edit(TipoNegocio $tipoNegocio)
     {
         //
+        return view('admin.tiponegocios.edit', compact('tipoNegocio'));
     }
 
     /**
@@ -54,6 +62,9 @@ class TipoNegocioController extends Controller
     public function update(UpdateTipoNegocioRequest $request, TipoNegocio $tipoNegocio)
     {
         //
+        $tipoNegocio->update($request->all());
+        return redirect()->away('/tiponegocios')
+            ->with('success', 'Tipo Negocio atualizado com sucesso!');
     }
 
     /**
@@ -62,5 +73,13 @@ class TipoNegocioController extends Controller
     public function destroy(TipoNegocio $tipoNegocio)
     {
         //
+        if ($tipoNegocio->negocios()->count() > 0) {
+            return redirect()->away('/tiponegocios')
+                ->with('error', 'Tipo Negocio possui dependentes!');
+        }
+
+        $tipoNegocio->delete();
+        return redirect()->away('/tiponegocios')
+            ->with('success', 'Tipo Negocio removido com sucesso!');
     }
 }
