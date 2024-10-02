@@ -14,6 +14,9 @@ class EstadoController extends Controller
     public function index()
     {
         //
+        $estado = Caderno::all();
+        // fazer o response pro usuario
+        return view('admin.estado.index',compact('estados'));
     }
 
     /**
@@ -22,6 +25,8 @@ class EstadoController extends Controller
     public function create()
     {
         //
+        $estado = Estado::all();
+        return view('site.estados.create',compact('estados'));
     }
 
     /**
@@ -30,6 +35,10 @@ class EstadoController extends Controller
     public function store(StoreEstadoRequest $request)
     {
         //
+        Estado::create($request->all());
+       //Redirecionar ou  devolver uma mensagem para o cliente
+       //return redirect()->route('/noticias.index');
+       return redirect()->away('/estados')->with('success','Estados criado com sucesso!');
     }
 
     /**
@@ -38,6 +47,8 @@ class EstadoController extends Controller
     public function show(Estado $estado)
     {
         //
+        return view('admin.estados.show', compact('estado'));
+
     }
 
     /**
@@ -46,6 +57,8 @@ class EstadoController extends Controller
     public function edit(Estado $estado)
     {
         //
+        $estados = Autor::all();
+        return view('admin.estado.edit', compact('cidade'));
     }
 
     /**
@@ -54,6 +67,9 @@ class EstadoController extends Controller
     public function update(UpdateEstadoRequest $request, Estado $estado)
     {
         //
+        $estado->update($request->all());
+        return redirect()->away('/estados')->with('success', 'Estados  atualizados com sucesso!');
+
     }
 
     /**
@@ -62,5 +78,10 @@ class EstadoController extends Controller
     public function destroy(Estado $estado)
     {
         //
+        $estado->delete();
+
+        
+        return redirect()->away('/estados')->with('success', 'Deletado  com sucesso!');
+
     }
 }

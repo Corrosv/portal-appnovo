@@ -14,6 +14,11 @@ class CidadeController extends Controller
     public function index()
     {
         //
+        //Carregue os dados do banco
+        //select * from cadernos
+        $cidade = Caderno::all();
+        // fazer o response pro usuario
+        return view('admin.cadernos.index',compact('cidades'));
     }
 
     /**
@@ -21,7 +26,9 @@ class CidadeController extends Controller
      */
     public function create()
     {
-        //
+        $cidade = Cidade::all();
+        $estado = Cidade::all();
+        return view('site.cidades.create',compact('cidades','estados'));
     }
 
     /**
@@ -30,6 +37,12 @@ class CidadeController extends Controller
     public function store(StoreCidadeRequest $request)
     {
         //
+        //Aqui vamos tratar as regras de salvamento e  vamos persistir no banco 
+        Cidade::create($request->all());
+       //Redirecionar ou  devolver uma mensagem para o cliente
+       //return redirect()->route('/noticias.index');
+       return redirect()->away('/cidades')->with('success','Cidade criada com sucesso!');
+
     }
 
     /**
@@ -38,6 +51,10 @@ class CidadeController extends Controller
     public function show(Cidade $cidade)
     {
         //
+        
+        return view('admin.cadernos.show', compact('caderno'));
+
+
     }
 
     /**
@@ -46,6 +63,9 @@ class CidadeController extends Controller
     public function edit(Cidade $cidade)
     {
         //
+        $cidades = Autor::all();
+        return view('admin.cidade.edit', compact('cidades'));
+
     }
 
     /**
@@ -54,6 +74,10 @@ class CidadeController extends Controller
     public function update(UpdateCidadeRequest $request, Cidade $cidade)
     {
         //
+        //
+        $cidade->update($request->all());
+        return redirect()->away('/cidades')->with('success', 'Cidades  atualizados com sucesso!');
+
     }
 
     /**
@@ -62,5 +86,10 @@ class CidadeController extends Controller
     public function destroy(Cidade $cidade)
     {
         //
+        $cidade->delete();
+
+        
+        return redirect()->away('/cidades')->with('success', 'Deletado  com sucesso!');
     }
+
 }

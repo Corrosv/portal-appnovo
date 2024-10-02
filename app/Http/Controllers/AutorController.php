@@ -14,6 +14,9 @@ class AutorController extends Controller
     public function index()
     {
         //
+        $autores = Autor::paginate(25);
+        // preciso responder o usuario
+        return view('admin.autor.index', compact('autores'));
     }
 
     /**
@@ -22,6 +25,11 @@ class AutorController extends Controller
     public function create()
     {
         //
+        $autores = Autor::all();
+
+        return view('site.autor.create', compact('autores'));
+
+
     }
 
     /**
@@ -30,6 +38,12 @@ class AutorController extends Controller
     public function store(StoreAutorRequest $request)
     {
         //
+
+        //Aqui vamos tratar as regras de salvamento e  vamos persistir no banco 
+        Autor::create($request->all());
+       //Redirecionar ou  devolver uma mensagem para o cliente
+       //return redirect()->route('/noticias.index');
+       return redirect()->away('/autores')->with('success','Autor  criado com sucesso!');
     }
 
     /**
@@ -38,6 +52,16 @@ class AutorController extends Controller
     public function show(Autor $autor)
     {
         //
+
+        //$id -> recebendo via api
+        // $noticia = Noticia::find($id);
+        // $nome e eu quero o primeiro registro
+        // $noticia = Noticia::where('nome',$nome)->first();
+        // $noticia = Noticia::where('nome',$nome)->get();
+        // $noticia = Noticia::where('nome',$nome)->paginate();
+        return view('admin.autores.show', compact('autor'));
+
+
     }
 
     /**
@@ -46,6 +70,9 @@ class AutorController extends Controller
     public function edit(Autor $autor)
     {
         //
+
+        $autores = Autor::all();
+        return view('admin.autor.edit', compact('autores'));
     }
 
     /**
@@ -54,6 +81,9 @@ class AutorController extends Controller
     public function update(UpdateAutorRequest $request, Autor $autor)
     {
         //
+
+        $autor->update($request->all());
+        return redirect()->away('/autores')->with('success', 'Autores atualizado com sucesso!');
     }
 
     /**
@@ -62,5 +92,12 @@ class AutorController extends Controller
     public function destroy(Autor $autor)
     {
         //
+
+        $autor->delete();
+
+        
+        return redirect()->away('/autores')->with('success', 'Deletado  com sucesso!');
+
+
     }
 }

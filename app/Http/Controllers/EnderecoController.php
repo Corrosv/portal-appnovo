@@ -14,6 +14,11 @@ class EnderecoController extends Controller
     public function index()
     {
         //
+        //Carregue os dados do banco
+        //select * from cadernos
+        $endereco = Endereco::all();
+        // fazer o response pro usuario
+        return view('admin.endereco.index',compact('enderecos'));
     }
 
     /**
@@ -22,6 +27,8 @@ class EnderecoController extends Controller
     public function create()
     {
         //
+        $cidade = Cidade::all();
+    return view('site.endereco.create', compact('enderecos','cidades','tipo_ponto_turistico'));
     }
 
     /**
@@ -29,7 +36,13 @@ class EnderecoController extends Controller
      */
     public function store(StoreEnderecoRequest $request)
     {
-        //
+        ///Debug 
+        //dd($request);
+        //Aqui vamos tratar as regras de salvamento e  vamos persistir no banco 
+        Endereco::create($request->all());
+        //Redirecionar ou  devolver uma mensagem para o cliente
+        //return redirect()->route('/noticias.index');
+        return redirect()->away('/enderecos')->with('success','Endereco  criado com sucesso!');
     }
 
     /**
@@ -38,6 +51,8 @@ class EnderecoController extends Controller
     public function show(Endereco $endereco)
     {
         //
+        return view('admin.enderecos.show', compact('endereco'));
+
     }
 
     /**
@@ -46,6 +61,10 @@ class EnderecoController extends Controller
     public function edit(Endereco $endereco)
     {
         //
+        $enderecos = Endereco::all();
+        $cidades = Cidade::all();
+        return view('admin.endereco.edit', compact('cadernos'));
+
     }
 
     /**
@@ -54,6 +73,8 @@ class EnderecoController extends Controller
     public function update(UpdateEnderecoRequest $request, Endereco $endereco)
     {
         //
+        $endereco->update($request->all());
+        return redirect()->away('/enderecos')->with('success', 'Enderecos atualizado com sucesso!');
     }
 
     /**
@@ -62,5 +83,14 @@ class EnderecoController extends Controller
     public function destroy(Endereco $endereco)
     {
         //
+    if($endereco->negocios()->count() > 0 || $endereco->pontoTuristicos()->count() > 0)
+    {
+    }else{
+
+    }
+     
+        return redirect()->away('/enderecos')->with('success', 'Deletado  com sucesso!');
     }
 }
+
+
