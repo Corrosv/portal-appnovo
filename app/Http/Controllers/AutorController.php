@@ -75,11 +75,9 @@ class AutorController extends Controller
         //
         if ($autor->noticias()->count() > 0) {
 
-            return redirect()->away('/autores')
-                ->with('success', 'Autor possui dependentes!');
+            return redirect()->away('/autores')->with('success', 'Autor possui dependentes!');
         }
         $autor->delete();
-        return redirect()->away('/autores')
-            ->with('success', 'Autor criado com sucesso!');
+        return redirect()->away('/autores')->with('success', 'Autor criado com sucesso!');
     }
 }
