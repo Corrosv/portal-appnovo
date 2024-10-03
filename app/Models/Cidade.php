@@ -13,8 +13,12 @@ class Cidade extends Model
 
     public function estado()
     {
-        return $this->belongsTO(Estado::class,'id_estado');
+        return $this->belongsTo(Estado::class,'id_estado');
 
 
+    }
+
+    public function enderecos() {
+        return $this->HasMany(enderecos::class);
     }
 }

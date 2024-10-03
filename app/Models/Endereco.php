@@ -15,6 +15,13 @@ class Endereco extends Model
     {
         return $this->belongsTO(Cidade::class,'id_cidade');
 
-
     }
+    public function negocios() {
+        return $this->hasMany(Negocio::class);
+    }
+
+    public function pontosTuristicos() {
+        return $this->hasMany(pontosTuristicos::class);
+    }
+
 }
