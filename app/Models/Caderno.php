@@ -13,5 +13,8 @@ class Caderno extends Model
     protected $fillable = ['nome'];
 
 
+    public function noticia() {
+        return $this->hasMany(Noticia::class);
+    }
 
 }

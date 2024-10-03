@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class TipoPontoTuristico extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = ['tipo'];
+
+    public function PontoTuristico(){
+        return $this->hasMany(PontoTuristico::class);
+    }
+
 }
