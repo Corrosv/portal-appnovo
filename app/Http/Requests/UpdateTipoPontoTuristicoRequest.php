@@ -11,7 +11,9 @@ class UpdateTipoPontoTuristicoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        $idTipoPontoTuristico = $this->route('tipopontoturistico');
+
+        return true;
     }
 
     /**
@@ -23,6 +25,8 @@ class UpdateTipoPontoTuristicoRequest extends FormRequest
     {
         return [
             //
+            'tipo' => 'required|string|max:255|unique:tipoNegocio,tipo'.$idTipoPontoTuristico
+
         ];
     }
 }

@@ -9,7 +9,7 @@ class Noticia extends Model
 {
     use HasFactory; 
 
-    protected $fillable = ['data', 'titulo', 'texto', 'id_autor', 'subtitulo','id_caderno'];
+    protected $fillable = [CZZ];
 
 
     public function autor() {

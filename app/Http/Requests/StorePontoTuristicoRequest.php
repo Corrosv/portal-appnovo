@@ -11,7 +11,7 @@ class StorePontoTuristicoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,13 @@ class StorePontoTuristicoRequest extends FormRequest
     {
         return [
             //
+            'nome'  => 'required|string|max:255|unique:ponto_turistico,nome',
+            'contato' => 'required|string|max:255',
+            'longitude_latidude' => 'required|string|max:255',
+            'como_chegar' => 'required|string|max:255',
+            'imagem' => 'required|string|max:255',
+            'id_endereco' => 'required|exists:endereco,id',
+            'id_tipo_ponto_turistico' => 'required|exists:pontoturistico,id'
         ];
     }
 }

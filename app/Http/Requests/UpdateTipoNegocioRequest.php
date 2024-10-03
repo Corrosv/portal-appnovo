@@ -11,7 +11,8 @@ class UpdateTipoNegocioRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        $idTipoNegocio = $this->route('tipoNegocio');
+        return true;
     }
 
     /**
@@ -23,6 +24,8 @@ class UpdateTipoNegocioRequest extends FormRequest
     {
         return [
             //
+            'tipo' => 'required|string|max:255|unique:tipoNegocio,tipo'.$idTipoNegocio
+
         ];
     }
 }
