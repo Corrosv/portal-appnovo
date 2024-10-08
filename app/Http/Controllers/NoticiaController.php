@@ -62,7 +62,7 @@ class NoticiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Noticia $noticia)
+    public function show($id)
     {
         // $id -> recebendo via api
         // $noticia = Noticia::find($id);
@@ -70,13 +70,14 @@ class NoticiaController extends Controller
         // $noticia = Noticia::where('nome',$nome)->first();
         // $noticia = Noticia::where('nome',$nome)->get();
         // $noticia = Noticia::where('nome',$nome)->paginate(20);
+        $noticia = Noticia::find($id);
         return view('admin.noticias.show', compact('noticia'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Noticia $noticia)
+    public function edit($id)
     {
         //
         $autores  = Autor::all();
@@ -90,13 +91,14 @@ class NoticiaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNoticiaRequest $request, Noticia $noticia)
+    public function update(UpdateNoticiaRequest $request, $id)
     {
         //exemplo api
         // $noticia = Noticia::find($id);
         // if(!$noticia){
         //  return response()->json(['error','Noticia não..']);
         // }
+          $noticia = Noticia::find($id);
         $noticia->update($request->all());
         return redirect()->away('/noticias')
             ->with('success', 'Noticia atualizada com sucesso!');
@@ -105,13 +107,14 @@ class NoticiaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Noticia $noticia)
+    public function destroy($id)
     {
         //
         // if ($cadernos->noticias()->count() > 0) {
         //     return redirect()->away('/noticias')
         //         ->with('error', 'Cardeno possui dependentes');
         // }
+          $noticia = Noticia::find($id);
         $noticia->delete();
 
         return redirect()->away('/noticias')

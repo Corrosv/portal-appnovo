@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePontoTuristicoRequest;
 use App\Http\Requests\UpdatePontoTuristicoRequest;
+use App\Models\Endereco;
 use App\Models\PontoTuristico;
+use App\Models\TipoPontoTuristico;
 
 class PontoTuristicoController extends Controller
 {
@@ -39,50 +41,60 @@ class PontoTuristicoController extends Controller
     {
         //
         PontoTuristico::create($request->all());
-        return redirect()->away('/pontosturisticos')->with('success', 'Pontos Turistico criado com sucesso!');
-
-        
-        
+        return redirect()->away('/pontosturisticos')
+            ->with('success', 'Pontos Turistico criado com sucesso!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PontoTuristico $pontoTuristico)
+    public function show($id)
     {
         //
-        return view('admin.pontosturisticos.show',compact('pontoTuristico'));    
-        }
+        $pontoTuristico = PontoTuristico::find($id);
+        return view(
+            'admin.pontosturisticos.show',
+            compact('pontoTuristico')
+        );
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PontoTuristico $pontoTuristico)
+    public function edit($id)
     {
         //
+        $pontoTuristico = PontoTuristico::find($id);
         $tipos = TipoPontoTuristico::all();
         $enderecos = Endereco::all();
-        return view('admin.pontosturisticos.edit',compact('tipos', 'enderecos', 'pontoTuristico'));
-
+        return view(
+            'admin.pontosturisticos.edit',
+            compact('tipos', 'enderecos', 'pontoTuristico')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePontoTuristicoRequest $request, PontoTuristico $pontoTuristico)
+    public function update(UpdatePontoTuristicoRequest $request, $id)
     {
         //
+        $pontoTuristico = PontoTuristico::find($id);
         $pontoTuristico->update($request->all());
-        return redirect()->away('/pontosturisticos')->with('success', 'Pontos Turistico atualizado com sucesso!');
+
+        return redirect()->away('/pontosturisticos')
+            ->with('success', 'Pontos Turistico atualizado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PontoTuristico $pontoTuristico)
-     {
+    public function destroy($id)
+    {
         //
+        $pontoTuristico = PontoTuristico::find($id);
         $pontoTuristico->delete();
-        return redirect()->away('/pontosturisticos')->with('success', 'Pontos Turistico removido com sucesso!');
-     }
-}  
+        return redirect()->away('/pontosturisticos')
+            ->with('success', 'Pontos Turistico removido com sucesso!');
+    }
+}
