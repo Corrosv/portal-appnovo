@@ -18,6 +18,12 @@ class NoticiaFactory extends Factory
     {
         return [
             //
+            'data' => $this->faker->dateTime(),
+            'titulo' => $this->faker->sentence,
+            'subtitulo' => $this->faker->sentence,
+            'texto' => $this->faker->text,
+            'id_autor' => Autor::pluck('id')->random(),
+            'id_caderno' => Caderno::pluck('id')->random(),
         ];
     }
 }

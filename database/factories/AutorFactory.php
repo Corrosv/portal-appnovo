@@ -18,6 +18,9 @@ class AutorFactory extends Factory
     {
         return [
             //
+            'nome' => $this->faker->name ,
+            'contato'=> $this->faker->phoneNumber
+
         ];
     }
 }

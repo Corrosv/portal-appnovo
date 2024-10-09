@@ -18,6 +18,9 @@ class EstadoFactory extends Factory
     {
         return [
             //
+            'sigla' => $this->faker->unique()->stateAbbr,
+
         ];
+        
     }
 }

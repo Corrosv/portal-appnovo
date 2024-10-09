@@ -7,6 +7,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 // GET: requisicao via URL
 // POST: requisição via cabecalho da request
 // UPDATE: requisição via  URL e cabecalho

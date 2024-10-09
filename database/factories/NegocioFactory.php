@@ -16,8 +16,19 @@ class NegocioFactory extends Factory
      */
     public function definition(): array
     {
+        $latlong =
+        $this->faker->latitude() .','.
+        $this->faker->longitude();
         return [
             //
+            'nome_fantasia' => $this->faker->name ,
+            'descricao' => $this->faker->text($maxNbchars = 200),
+            'contato' => $this->faker->phoneNumber,
+            'latitude_longitude' => $this->faker-> $latlang,
+            'ativo' => $this->faker->boolean,
+            'id_tipo_negocio' => TipoNegocio::pluck('id')->random(),
+            'id_endereco' => endereco::pluck('id')->random()
+
         ];
     }
 }
