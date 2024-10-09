@@ -18,7 +18,7 @@ class TipoNegocioFactory extends Factory
     {
         return [
             //
-            'tipo' => $this->fake->unique()->word,
+            'tipo' => $this->faker->unique()->word,
         ];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Autor;
+use App\Models\Caderno;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +20,7 @@ class NoticiaFactory extends Factory
     {
         return [
             //
-            'data' => $this->faker->dateTime(),
+            'data' => $this->faker->dateTime,
             'titulo' => $this->faker->sentence,
             'subtitulo' => $this->faker->sentence,
             'texto' => $this->faker->text,

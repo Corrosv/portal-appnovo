@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('nome_fantasia');
             $table->text('descricao');
             $table->text('contato');
-            $table->text('latitude_longitude');
+            $table->string('latitude_longitude');
             $table->boolean('ativo');
             
             $table->unsignedBigInteger('id_tipo_negocio');
             $table->foreign('id_tipo_negocio')->references('id')->on('tipo_negocios');
             $table->unsignedBigInteger('id_endereco');
-            $table->foreign('id_endereco')->references('id')->on('id_enderecos');
+            $table->foreign('id_endereco')->references('id')->on('enderecos');
             
             
         

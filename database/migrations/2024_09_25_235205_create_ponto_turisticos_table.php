@@ -22,9 +22,9 @@ return new class extends Migration
 
 
             $table->unsignedBigInteger('id_endereco');
-            $table->foreign('id_endereco')->references('id')->on('tipo_enderecos');
+            $table->foreign('id_endereco')->references('id')->on('enderecos');
             $table->unsignedBigInteger('id_tipo_ponto_turistico');
-            $table->foreign('id_tipo_ponto_turistico')->references('id')->on('id_tipo_ponto_turisticos');
+            $table->foreign('id_tipo_ponto_turistico')->references('id')->on('tipo_ponto_turisticos');
 
 
 

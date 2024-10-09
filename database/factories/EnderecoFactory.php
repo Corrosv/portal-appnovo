@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Cidade;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,7 @@ class EnderecoFactory extends Factory
         return [
             //
             'logradouro' => $this->faker->name,
-            'endereco' => $this->faker->adress,
+          
             'cep' => $this->faker->numberBetween($min= 1000000000, $max = 9000000000),
             'id_cidade' => Cidade::pluck('id')->random()
         ];

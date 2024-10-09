@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Endereco;
+use App\Models\TipoNegocio;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,10 +26,10 @@ class NegocioFactory extends Factory
             'nome_fantasia' => $this->faker->name ,
             'descricao' => $this->faker->text($maxNbchars = 200),
             'contato' => $this->faker->phoneNumber,
-            'latitude_longitude' => $this->faker-> $latlang,
+            'latitude_longitude' =>$latlong,
             'ativo' => $this->faker->boolean,
             'id_tipo_negocio' => TipoNegocio::pluck('id')->random(),
-            'id_endereco' => endereco::pluck('id')->random()
+            'id_endereco' => Endereco::pluck('id')->random()
 
         ];
     }

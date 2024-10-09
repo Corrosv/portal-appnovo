@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Endereco;
+use App\Models\TipoPontoTuristico;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,14 +27,14 @@ class PontoTuristicoFactory extends Factory
             
             'nome' => $this->faker->name,
             'contato' => $this->faker->phoneNumber,
-            'latitude_longitude'  => $this->faker-> $latlang,
+            'latitude_longitude'  => $latlong,
             'descricao' => $this->faker->sentence,
             'como_chegar' => $this->faker->sentence,
             'imagem' => $this->faker->imageUrl($width = 640, $height = 480),
 
 
-            'id_endereco' => endereco::pluck('id')->random(),
-            'id_tipo_ponto_turistico' => TipoPontoTuristico::pluck('id')->random(),
+            'id_endereco' => Endereco::pluck('id')->random(),
+            'id_tipo_ponto_turistico' => TipoPontoTuristico::pluck('id')->random()
         ];
     }
 }
