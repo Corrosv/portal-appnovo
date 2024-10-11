@@ -8,14 +8,12 @@ use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\PontoTuristicoController;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TipoNegocioController;
 use App\Http\Controllers\TipoPontoTuristicoController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/',[SiteController::class,'admin'])->name('site.admin');
 
 // GET: requisicao via URL
 // POST: requisição via cabecalho da request
