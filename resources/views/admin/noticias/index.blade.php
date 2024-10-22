@@ -1,7 +1,7 @@
 <!-- Herdar as caracteristicas do meu template -->
 @extends('layout.app')
  <!-- Ajustar o título -->
-@section('title','Admin')
+@section('title','Noticias')
 <!-- Carregar no yield conteudo -->
 @section('conteudo')
 <div>

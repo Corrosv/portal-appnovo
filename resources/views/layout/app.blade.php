@@ -17,6 +17,28 @@
 
     <!--- Main --->
 <main>
+  <!-- Mostrar mensagem de sucesso -->
+
+    @if(session("success"))
+    <div class="alert alert-success alert-dismissible fade show"
+                    role="alert">
+             {{session("success")}}
+             <button type="button" class="btn-close" data-bs-dismiss="alert">
+    </div>
+    @endif
+
+  <!-- Mostrar mensagem de erro -->
+
+  @if(session("error"))
+    <div class="alert alert-danger alert-dismissible fade show"
+                    role="alert">
+             {{session("error")}}
+             <button type="button" class="btn-close" data-bs-dismiss="alert">
+    </div>
+    @endif
+
+
+
     <div class="container">
            @yield('conteudo')
     </div>
