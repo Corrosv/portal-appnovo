@@ -18,10 +18,10 @@ class Noticia extends Model
 
 
     public function autor() {
-        return $this->belongTo(Autor::class,'id_autor');
+        return $this->belongsTo(Autor::class,'id_autor');
     }
     public function caderno()
     {
-        return $this->belongTo(Caderno::class, 'id_caderno');
+        return $this->belongsTo(Caderno::class, 'id_caderno');
     }
 }

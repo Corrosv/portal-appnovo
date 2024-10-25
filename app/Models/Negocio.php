@@ -13,10 +13,10 @@ class Negocio extends Model
 
 
     public function TipoNegocio() {
-        return $this->belongTo(TipoNegocio::class,'id_TipoNegocio');
+        return $this->belongsTo(TipoNegocio::class,'id_TipoNegocio');
     }
     public function endereco()
     {
-        return $this->belongTo(Endereco::class, 'id_endereco');
+        return $this->belongsTo(Endereco::class, 'id_endereco');
     }
 }

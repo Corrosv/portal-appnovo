@@ -21,14 +21,15 @@ class StoreNoticiaRequest extends FormRequest
      */
     public function rules(): array
     {
+         
         return [
             //
                'data' => 'required|date',
                'titulo' => 'required|string|max:255',
               'texto' => 'required|string|max:255',
-              'id_autor' => 'required|string',
-               'subtitulo' => 'required|exists:autores,id',
-               'id_caderno' => 'required|exists:caderno,id',
+              'subtitulo' => 'required|string',
+               'id_autor' => 'required|exists:autors,id',
+               'id_caderno' => 'required|exists:cadernos,id',
         ];
     }
 }

@@ -13,7 +13,7 @@ class Endereco extends Model
 
     public function cidades()
     {
-        return $this->belongsTO(Cidade::class,'id_cidade');
+        return $this->belongsTo(Cidade::class,'id_cidade');
 
     }
     public function negocios() {

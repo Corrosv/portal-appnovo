@@ -13,10 +13,10 @@ class PontoTuristico extends Model
 
 
     public function endereco() {
-        return $this->belongTo(Endereco::class,'id_endereco');
+        return $this->belongsTo(Endereco::class,'id_endereco');
     }
     public function tipopontoturistico()
     {
-        return $this->belongTo(TipoPontoTuristico::class, 'id_tipo_ponto_turistico');
+        return $this->belongsTo(TipoPontoTuristico::class, 'id_tipo_ponto_turistico');
     }
 }

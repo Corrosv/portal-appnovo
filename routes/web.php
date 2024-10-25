@@ -40,7 +40,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('/cadernos',CadernoController::class);
     Route::resource('/autores',AutorController::class);
-    Route::resource('/Noticias',NoticiaController::class);
+    Route::resource('/noticias',NoticiaController::class);
     Route::resource('/Negocio',NegocioController::class);
     Route::resource('/TipoNegocio',TipoNegocioController::class);
     Route::resource('/TipoPontoTuristico',TipoPontoTuristicoController::class);

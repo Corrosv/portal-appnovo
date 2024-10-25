@@ -8,6 +8,7 @@
   <!-- cabeçalho -->
     <div>
         <h2>Noticias</h2>
+        <!--- route('nome.da.rota',$) -->
         <a href="/admin/noticias/create"
         class="btn btn-success"
         >Novo</a>
@@ -68,7 +69,7 @@
         <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        Você tem certeza que quer romover?
+        Você tem certeza que quer remover?
       </div>
       <div class="modal-footer">
         <form id="deleteForm" aria-roledescription="" method="POST" action="">
